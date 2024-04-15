@@ -30,8 +30,7 @@ def displayRecommendations(response, REVIEWS):
             drug = re.search(r'Medicine\s*\"([^\"]+)\"', recom).group(1)
             drug = drug.split(" ")[0].split("/")[0].lower()
         except AttributeError:
-            st.write(
-                "No recommendations found, please try again or try searching for a different condition")
+            pass
             return
         with st.container():
             st.markdown(recom)
@@ -54,6 +53,7 @@ def displayRecommendations(response, REVIEWS):
                     st.write("Negative Reviews")
                     for review in negativeReviews:
                         st.markdown('''\n :red[{}]'''.format(review))
+    return True
 
 
 st.title("DialRx Bot")
@@ -87,7 +87,7 @@ st.markdown(
 if 'previous_answers' not in st.session_state:
     st.session_state.previous_answers = []
 
-# st.sidebar.image('logo.png', width=500)
+st.sidebar.image(f"{project_dir}/data/logo.png", width=200)
 st.sidebar.title("Chatbox")
 
 setupData = setup()
